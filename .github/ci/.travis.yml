@@ -1,0 +1,55 @@
+language: python
+os: linux
+dist: bionic
+sudo: required
+services: docker
+python: '3.6'
+git:
+  submodules: false
+cache: pip
+script: skip
+jobs:
+  include:
+    - stage: test
+      name: "Unit Tests"
+      install: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install nose
+      script:
+        - nosetests tests
+    # - stage: test
+    #   name: "Django Unit Tests"
+    #   install:
+    #     - python -m pip install --upgrade pip
+    #     - pip install -r requirements.txt
+    #   script:
+    #     - python manage.py migrate
+    #     - python manage.py test
+    - stage: deploy
+      name: "Build & Upload Docs"
+      before_install: |
+        sudo apt-get update -q
+        sudo apt-get install -y pandoc
+      install:
+        - docker pull fredqi/texlive
+      script: |
+        export PATH=$PATH:.github/bin
+        docker create --name=texlive -v `pwd`:/latex -it fredqi/texlive
+        docker start texlive
+        # docker exec texlive bash -c "latexmk -cd -quiet -pdfxe *.tex"
+        docker_latexmk.sh texlive --version
+        docker exec texlive bash -c "xelatex --version"
+        docker stop texlive
+        docker rm texlive
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script: |
+          echo "Upload files onto dropbox..."
+          # dropbox_upload $SOURCE $TARGET
+        on:
+          all_branches: true
+notifications:
+  email: false
+  

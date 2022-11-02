@@ -1,0 +1,50 @@
+name: GPU Runner
+
+on: [push]
+
+jobs:
+  Testing:
+
+    runs-on: [self-hosted, gpu]
+    
+    steps:
+    - name: Checking GPU
+      run: |
+        nvidia-smi -L
+
+    - name: Check mounted anaconda
+      run: |
+        . "/opt/conda/etc/profile.d/conda.sh"
+        # . "/home/user/conda/etc/profile.d/conda.sh"
+        conda activate
+        conda info
+        echo "Packages:"
+        conda list -c pytorch
+        conda list -c cudatoolkit
+        which python3
+        python3 --version
+        
+    - name: Checking pytorch
+      run: |
+        . "/opt/conda/etc/profile.d/conda.sh"
+        # . "/home/user/conda/etc/profile.d/conda.sh"
+        conda activate base
+        echo "import torch; print('GPU: ', torch.cuda.get_device_name())" > checkgpu.py
+        python3 checkgpu.py
+
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Install mypackage
+      run: |
+        . "/opt/conda/etc/profile.d/conda.sh"        
+        conda activate mypackage
+        pip install .
+
+    - name: Testing mypackage
+      run: |
+        . "/opt/conda/etc/profile.d/conda.sh"        
+        conda activate mypackage
+        export PATH=$HOME/.local/bin:$PATH
+        mypackage --print_config fit
+        find $HOME/.local -type f

@@ -1,0 +1,31 @@
+repository:
+  has_issues: true
+  has_wiki: false
+  has_projects: false
+  has_downloads: false
+  allow_forking: false
+  allow_squash_merge: false
+  
+labels:
+  - name: coding
+    color: 159818
+  - name: conference
+    color: 336699
+  - name: discussion
+    color: cc317c
+  - name: funding
+    color: e11d21
+  - name: journal
+    color: f7c6c7
+  - name: patent
+    color: bfd4f2
+  - name: report
+    color: d4c5f9
+  - name: revision
+    color: 84b6eb
+  - name: writing
+    color: 207d35
+  - name: survey
+    color: 2319e7
+
+  

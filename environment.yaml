@@ -1,0 +1,18 @@
+name: mypackage
+dependencies:
+  - python=3.8
+  - matplotlib-base
+  - h5py
+  - pytorch::torchvision
+  - pytorch::pytorch=1.10
+  # - pytorch::cpuonly
+  - conda-forge::pytorch-lightning
+  - conda-forge::jsonargparse
+  - conda-forge::docstring_parser
+  - conda-forge::lightning-flash
+  - pip
+  - pip:
+      - ruyaml
+      - pytest
+      - flake8
+      - -e .

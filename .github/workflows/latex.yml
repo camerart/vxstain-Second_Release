@@ -1,0 +1,42 @@
+name: LaTeX Compilation
+
+on:
+  push:
+    paths:
+      - 'docs/intro/**'
+  # pull_request:
+  #   paths:
+  #     - 'docs/**'
+
+jobs:
+  build:
+    runs-on: [self-hosted, latex]
+
+    strategy:
+      matrix:
+        include:
+          - FOLDER: intro
+            BASE_FILE: introduction
+
+    name: Compile ${{ matrix.FOLDER }}
+
+    env:
+      MAIN_FILE: docs/${{ matrix.FOLDER }}/${{ matrix.BASE_FILE }}
+        
+    steps:
+    - name: Checkout sources
+      uses: actions/checkout@v1
+
+    - name: Compile with pdflatex
+      uses: repaction/texlive@main
+      with:
+        tex_files: ${{ env.MAIN_FILE }}.tex
+          
+    - name: Upload to dropbox
+      uses: repaction/uploader@main
+      env:
+        DROPBOX_TOKEN: ${{ secrets.DROPBOX_TOKEN }}
+
+      with:
+        src_file: ${{ env.MAIN_FILE }}.pdf
+        dst_file: /devel/${{ matrix.BASE_FILE }}.pdf

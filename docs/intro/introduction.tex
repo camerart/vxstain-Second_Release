@@ -1,0 +1,94 @@
+\documentclass[compsoc]{IEEEtran}
+
+\usepackage{amsmath,amssymb}
+\usepackage{caption,subcaption}
+\usepackage[colorlinks]{hyperref}
+
+\title{Introduction}
+\author{FirstA LastA \and FirstB LastB\thanks{Funding and author information}}
+% \markboth{}{}
+
+\begin{document}
+
+\IEEEtitleabstractindextext{
+\begin{abstract} This is the abstract.
+  
+\end{abstract}
+
+\begin{IEEEkeywords}
+  
+\end{IEEEkeywords}}
+
+\maketitle
+
+\section{Introduction}
+\label{sec:introduction}
+
+\IEEEPARstart{A}{ccording} to~\cite{ham_deep_2019}, multi-year ENSO can be predicted
+using deep convolutional networks.
+
+\section{Related Works}
+\label{sec:related-works}
+
+\section{SlowFast Cloud Tracking}
+\label{sec:slowf-cloud-track}
+
+Example equation:
+\begin{equation}
+  \label{eq:example}
+  a^{2} + b^{2} = c^{2}.
+\end{equation}
+
+As given by~\eqref{eq:example}, the blabla. 
+
+\section{Experiments}
+\label{sec:experiments}
+
+\subsection{Ablation Study}
+\label{sec:ablation-study}
+
+Ablation study is shown in Table~\ref{tab:ablation}.
+
+\begin{table}[h]
+  \centering
+  \caption{Ablation Study}
+  \label{tab:ablation}
+  % Generally, tables are with only three horizontal lines
+  \begin{tabular}{ccc|ccc}
+    \hline
+    Component A & Comp B & Comp C & Metric A & M-B & M-C\\
+    \hline
+    & & & & & \\
+    & & & & & \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\subsection{Comparison with SOTA}
+\label{sec:comparison-with-sota}
+
+\begin{figure}[h]
+  \centering
+  % To show figures, replace \makebox with \includegraphics
+  % To show a whole figure, using only \includegraphics
+  % To show a figure occupies both columns, using environment figure*
+  \subfloat[Sub-caption]{\makebox[0.5\linewidth]{Sub Figure A}}
+  \subfloat[Sub-caption]{\makebox[0.5\linewidth]{Sub Figure B}}
+  \caption{Results}
+  \label{fig:results}
+\end{figure}
+
+As shown in Fig.~\ref{fig:results}.
+
+\section{Conclusions}
+\label{sec:conclusions}
+
+
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,refs}
+
+\end{document}
+
+%%% Local Variables:
+%%% TeX-engine: default
+%%% End:
